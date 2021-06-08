@@ -5,15 +5,15 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+const api_key = process.env.REACT_APP_GOOGLE_API_KEY;
+
 function LocationSearch(props) {
   const [inputValue, setInputValue] = useState('');
   const [data, setData] = useState([]);
 
   useEffect(() => {
     if (inputValue !== '') {
-      const URL =
-        '/place/autocomplete/json?key=AIzaSyCYR2keF-c6-A0Js1Z9plAMfrQ004E-kfI&input=' +
-        inputValue;
+      const URL = `/place/autocomplete/json?key=${api_key}&input=${inputValue}`;
       axios
         .get(URL)
         .then(res => {
@@ -28,9 +28,7 @@ function LocationSearch(props) {
   const setLocation = val => {
     if (val !== null) {
       props.setAddress(val.description);
-      const URL =
-        '/place/details/json?key=AIzaSyCYR2keF-c6-A0Js1Z9plAMfrQ004E-kfI&placeid=' +
-        val.place_id;
+      const URL = `/place/details/json?key=${api_key}&placeid=${val.place_id}`;
       axios
         .get(URL)
         .then(res => {

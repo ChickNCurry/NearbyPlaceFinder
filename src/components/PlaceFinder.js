@@ -10,6 +10,8 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+const api_key = process.env.REACT_APP_GOOGLE_API_KEY;
+
 const types = [
   { id: 'amusement_park', name: 'Amusement Park' },
   { id: 'aquarium', name: 'Aquarium' },
@@ -67,16 +69,7 @@ function PlaceFinder(props) {
 
   const findPlacesOfType = type => {
     console.log(type);
-    const URL =
-      '/place/nearbysearch/json?location=' +
-      props.coords.lat +
-      ',' +
-      props.coords.lng +
-      '&type=' +
-      type +
-      '&radius=' +
-      props.radius +
-      '&key=AIzaSyCYR2keF-c6-A0Js1Z9plAMfrQ004E-kfI';
+    const URL = `/place/nearbysearch/json?location=${props.coords.lat},${props.coords.lng}&type=${type}&radius=${props.radius}&key=${api_key}`;
     return axios
       .get(URL)
       .then(res => res.data.results)
