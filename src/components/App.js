@@ -1,11 +1,13 @@
-import './App.css';
-import LocationSearch from './components/LocationSearch';
-import PlaceFinder from './components/PlaceFinder';
-import PlacesList from './components/PlacesList';
-import { useState } from 'react';
-import Map from './components/Map';
+import "../styling/App.css";
 
-function App() {
+import { useState } from "react";
+
+import LocationSearch from "./LocationSearch";
+import PlaceFinder from "./PlaceFinder";
+import PlacesList from "./PlacesList";
+import Map from "./Map";
+
+export default function App() {
   const [coords, setCoords] = useState({
     lat: null,
     lng: null,
@@ -14,13 +16,14 @@ function App() {
     lat: null,
     lng: null,
   });
-  const [address, setAddress] = useState('');
-  const [category, setCategory] = useState('');
-  const [radius, setRadius] = useState();
+  const [address, setAddress] = useState("");
+  const [category, setCategory] = useState("");
+  const [radius, setRadius] = useState(0);
   const [places, setPlaces] = useState([]);
+
   return (
-    <div className='wrapper'>
-      <div className='ui'>
+    <div className="wrapper">
+      <div className="ui">
         <LocationSearch
           address={address}
           setAddress={setAddress}
@@ -41,11 +44,9 @@ function App() {
           markerCoords={markerCoords}
         />
       </div>
-      <div className='map'>
+      <div className="map">
         <Map coords={coords} markerCoords={markerCoords} />
       </div>
     </div>
   );
 }
-
-export default App;
